@@ -96,40 +96,40 @@ libjpl.a: jpleph.o
 	ar rv libjpl.a jpleph.o
 
 .cpp.o:
-	$(CPP) $(CFLAGS) -c $<
+	$(CPP) $(CPPFLAGS) $(CFLAGS) -c $<
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
 
 asc2eph$(EXE):          asc2eph.o f_strtod.o
-	$(CC) -o asc2eph$(EXE) asc2eph.o f_strtod.o $(LIB)
+	$(CC) -o asc2eph$(EXE) asc2eph.o f_strtod.o $(LIB) $(LDFLAGS)
 
 ftest$(EXE):          ftest.o f_strtod.o
-	$(CC) -o ftest$(EXE) ftest.o f_strtod.o
+	$(CC) -o ftest$(EXE) ftest.o f_strtod.o $(LDFLAGS)
 
 eph2asc$(EXE):          eph2asc.o libjpl.a
-	$(CC) -o eph2asc$(EXE) eph2asc.o libjpl.a $(LIB)
+	$(CC) -o eph2asc$(EXE) eph2asc.o libjpl.a $(LIB) $(LDFLAGS)
 
 eph2$(EXE):             eph2.o libjpl.a
-	$(CC) -o eph2$(EXE)    eph2.o libjpl.a $(LIB)
+	$(CC) -o eph2$(EXE)    eph2.o libjpl.a $(LIB) $(LDFLAGS)
 
 dump_eph$(EXE):          dump_eph.o libjpl.a
-	$(CC) -o dump_eph$(EXE) dump_eph.o libjpl.a $(LIB)
+	$(CC) -o dump_eph$(EXE) dump_eph.o libjpl.a $(LIB) $(LDFLAGS)
 
 masses$(EXE):          masses.o libjpl.a
-	$(CC) -o masses$(EXE) masses.o libjpl.a $(LIB)
+	$(CC) -o masses$(EXE) masses.o libjpl.a $(LIB) $(LDFLAGS)
 
 merge_de$(EXE):          merge_de.o libjpl.a
-	$(CC) -o merge_de$(EXE) merge_de.o libjpl.a $(LIB)
+	$(CC) -o merge_de$(EXE) merge_de.o libjpl.a $(LIB) $(LDFLAGS)
 
 sub_eph$(EXE):          sub_eph.o libjpl.a
-	$(CC) -o sub_eph$(EXE) sub_eph.o libjpl.a -L $(LIB_DIR) -llunar $(LIB)
+	$(CC) -o sub_eph$(EXE) sub_eph.o libjpl.a -L $(LIB_DIR) -llunar $(LIB) $(LDFLAGS)
 
 sub_eph.o: sub_eph.cpp
-	$(CPP) $(CFLAGS) -c -DTEST_MAIN sub_eph.cpp
+	$(CPP) $(CPPFLAGS) $(CFLAGS) -c -DTEST_MAIN sub_eph.cpp
 
 testeph$(EXE):          testeph.o libjpl.a
-	$(CC) -o testeph$(EXE) testeph.o libjpl.a $(LIB)
+	$(CC) -o testeph$(EXE) testeph.o libjpl.a $(LIB) $(LDFLAGS)
 
 clean:
 	$(RM) *.o
